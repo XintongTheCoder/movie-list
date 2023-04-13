@@ -1,15 +1,15 @@
-var path = require('path');
-var SRC_DIR = path.join(__dirname, '/client/src');
-var DIST_DIR = path.join(__dirname, '/client/dist');
+var path = require("path");
+var SRC_DIR = path.join(__dirname, "/client/src");
+var DIST_DIR = path.join(__dirname, "/client/dist");
 
 module.exports = {
-  mode: 'development',
+  mode: "development",
   entry: `${SRC_DIR}/index.js`,
   output: {
-    filename: 'bundle.js',
-    path: DIST_DIR
+    filename: "bundle.js",
+    path: DIST_DIR,
   },
-  devtool: 'source-map',
+  devtool: "source-map",
   module: {
     rules: [
       {
@@ -18,20 +18,18 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: [
-              "@babel/preset-env",
-              "@babel/preset-react"
-            ],
+            presets: ["@babel/preset-env", "@babel/preset-react"],
             plugins: [
-              ["@babel/plugin-transform-runtime",
+              [
+                "@babel/plugin-transform-runtime",
                 {
-                  "regenerator": true
-                }
-              ]
-            ]
-          }
-        }
-      }
+                  regenerator: true,
+                },
+              ],
+            ],
+          },
+        },
+      },
     ],
-  }
+  },
 };
