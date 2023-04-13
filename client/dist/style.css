@@ -1,3 +1,29 @@
 body {
   font-family: sans-serif, arial;
 }
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#title {
+  font-family: 'Nanum Brush Script', cursive;
+  font-size: 50px;
+}
+
+.movie-info-container {
+  display: flex;
+  flex-direction: row;
+  height: 300px;
+}
+
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+.movie-poster {
+  height: 100%;
+}
+

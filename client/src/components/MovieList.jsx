@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from "react";
+import MovieInfo from "./MovieInfo.jsx";
 const MovieList = ({
   movies,
   displayedMovies,
@@ -7,6 +8,7 @@ const MovieList = ({
   setMovies,
 }) => {
   const [searchInput, setSearchInput] = useState("");
+  const [selectedMovie, setSelectedMovie] = useState();
 
   return (
     <div className="movie-list-container">
@@ -50,7 +52,38 @@ const MovieList = ({
           {displayedMovies.length > 0 ? (
             displayedMovies.map((movie, index) => (
               <Fragment key={movie.title}>
-                <div>{movie.title}</div>
+                <div
+                  onClick={(event) => {
+                    event.preventDefault();
+                    console.log("clicked!");
+                    console.log("selectedMovie", selectedMovie);
+                    const selectedMovieTitle = event.target.innerHTML;
+                    console.log(event.target);
+                    // Toggle the display of current movie's info
+                    if (
+                      selectedMovie &&
+                      selectedMovie.title === selectedMovieTitle
+                    ) {
+                      setSelectedMovie();
+                    } else {
+                      console.log("selectedMovie", selectedMovie);
+                      console.log("selectedMovieTitle", selectedMovieTitle);
+                      const newSelectedMovie = movies.find((movie) => {
+                        return movie.title === selectedMovieTitle;
+                      });
+                      console.log("movies", movies);
+                      console.log("newselectedMovie", newSelectedMovie);
+                      setSelectedMovie(newSelectedMovie);
+                      console.log("selectedMovie", selectedMovie);
+                    }
+                  }}
+                >
+                  {movie.title}
+                </div>
+                {selectedMovie && selectedMovie.title === movie.title && (
+                  <MovieInfo selectedMovie={selectedMovie}></MovieInfo>
+                )}
+
                 <button
                   className="toggle-watched-btn"
                   onClick={() => {
