@@ -8,7 +8,7 @@ const MovieList = ({
   setMovies,
 }) => {
   const [searchInput, setSearchInput] = useState("");
-  const [selectedMovie, setSelectedMovie] = useState();
+  const [selectedMovie, setSelectedMovie] = useState({ title: "" });
 
   return (
     <div className="movie-list-container">
@@ -52,53 +52,53 @@ const MovieList = ({
           {displayedMovies.length > 0 ? (
             displayedMovies.map((movie, index) => (
               <Fragment key={movie.title}>
-                <div
-                  onClick={(event) => {
-                    event.preventDefault();
-                    console.log("clicked!");
-                    console.log("selectedMovie", selectedMovie);
-                    const selectedMovieTitle = event.target.innerHTML;
-                    console.log(event.target);
-                    // Toggle the display of current movie's info
-                    if (
-                      selectedMovie &&
-                      selectedMovie.title === selectedMovieTitle
-                    ) {
-                      setSelectedMovie();
-                    } else {
-                      console.log("selectedMovie", selectedMovie);
-                      console.log("selectedMovieTitle", selectedMovieTitle);
-                      const newSelectedMovie = movies.find((movie) => {
-                        return movie.title === selectedMovieTitle;
+                <div className="movie-title-container">
+                  <div
+                    className="movie-title"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      const selectedMovieTitle = event.target.innerHTML;
+                      // Toggle the display of current movie's info
+                      if (
+                        selectedMovie &&
+                        selectedMovie.title === selectedMovieTitle
+                      ) {
+                        setSelectedMovie({});
+                      } else {
+                        const newSelectedMovie = movies.find((movie) => {
+                          return movie.title === selectedMovieTitle;
+                        });
+                        setSelectedMovie(newSelectedMovie);
+                      }
+                    }}
+                    style={{
+                      backgroundColor:
+                        movie.title === selectedMovie.title
+                          ? "MediumSeaGreen"
+                          : "",
+                    }}
+                  >
+                    {movie.title}
+                  </div>
+                  <button
+                    className="toggle-watched-btn"
+                    onClick={() => {
+                      const movieTitle = movie.title;
+                      const newMovies = movies.map((movie) => {
+                        if (movie.title === movieTitle) {
+                          movie.watched = !movie.watched;
+                        }
+                        return movie;
                       });
-                      console.log("movies", movies);
-                      console.log("newselectedMovie", newSelectedMovie);
-                      setSelectedMovie(newSelectedMovie);
-                      console.log("selectedMovie", selectedMovie);
-                    }
-                  }}
-                >
-                  {movie.title}
+                      setMovies(newMovies);
+                    }}
+                  >
+                    {movie.watched ? "watched" : "to watch"}
+                  </button>
                 </div>
                 {selectedMovie && selectedMovie.title === movie.title && (
                   <MovieInfo selectedMovie={selectedMovie}></MovieInfo>
                 )}
-
-                <button
-                  className="toggle-watched-btn"
-                  onClick={() => {
-                    const movieTitle = movie.title;
-                    const newMovies = movies.map((movie) => {
-                      if (movie.title === movieTitle) {
-                        movie.watched = !movie.watched;
-                      }
-                      return movie;
-                    });
-                    setMovies(newMovies);
-                  }}
-                >
-                  {movie.watched ? "watched" : "to watch"}
-                </button>
               </Fragment>
             ))
           ) : (

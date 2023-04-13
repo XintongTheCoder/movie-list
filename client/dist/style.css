@@ -1,10 +1,11 @@
 body {
-  font-family: sans-serif, arial;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 .main-container {
   display: flex;
   flex-direction: column;
+  width: 50%;
 }
 
 #title {
@@ -12,18 +13,57 @@ body {
   font-size: 50px;
 }
 
+.movie-list-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.movie-list {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+}
+
+.movie-title-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 50px;
+  margin-top: 10px;
+}
+
+.movie-title {
+  font-size: 30px;
+  font-weight:bolder;
+  text-align: center;
+  cursor: pointer;
+}
+
 .movie-info-container {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   height: 300px;
+  padding-top: 20px;
 }
 
 .movie-info {
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 65%;
 }
+
 .movie-poster {
   height: 100%;
+}
+
+.toggle-watched-btn {
+  height: fit-content;
 }
 

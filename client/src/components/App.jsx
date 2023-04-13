@@ -2,15 +2,19 @@ import React, { useState, useEffect } from "react";
 import MovieList from "./MovieList.jsx";
 import searchMovieDB from "../searchMovieDB.js";
 const App = (props) => {
-  // const MOVIES = [
-  //   { title: "Mean Girls", watched: false },
-  //   { title: "Hackers", watched: false },
-  //   { title: "The Grey", watched: false },
-  //   { title: "Sunshine", watched: false },
-  //   { title: "Ex Machina", watched: false },
-  // ];
-
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState([
+    {
+      title: "Gone with the Wind",
+      original_language: "en",
+      year: 1939,
+      vote: 7.984,
+      watched: true,
+      overview:
+        "The spoiled daughter of a Georgia plantation owner conducts a tumultuous romance with a cynical profiteer during the American Civil War and Reconstruction Era.",
+      poster:
+        "https://image.tmdb.org/t/p/original/lNz2Ow0wGCAvzckW7EOjE03KcYv.jpg",
+    },
+  ]);
   const [textFilter, setTextFilter] = useState("");
   const [watchedFilter, setWatchedFilter] = useState(true);
   const [displayedMovies, setDisplayedMovies] = useState(movies);
