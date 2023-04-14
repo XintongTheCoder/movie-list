@@ -8,7 +8,7 @@ const MovieInfo = ({ selectedMovie }) => {
           Original_language: {selectedMovie.original_language.toUpperCase()}
         </div>
         <div>Year: {selectedMovie.year}</div>
-        <div>Vote: {selectedMovie.vote}</div>
+        <div>Rating: {selectedMovie.vote}</div>
         <div>Overview: {selectedMovie.overview}</div>
       </div>
       <div className="movie-poster-container">
