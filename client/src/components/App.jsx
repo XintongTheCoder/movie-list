@@ -4,26 +4,37 @@ import searchMovieDB from "../searchMovieDB.js";
 import initialMovieData from "../data/initialMovieData.js";
 
 const App = (props) => {
-  const [movies, setMovies] = useState(initialMovieData);
+  const [movies, setMovies] = useState([]);
+
   const [textFilter, setTextFilter] = useState("");
   const [watchedFilter, setWatchedFilter] = useState(true);
   const [displayedMovies, setDisplayedMovies] = useState(movies);
   const [newMovieTitle, setNewMovieTitle] = useState("");
 
-  const filterMovies = () => {
-    setDisplayedMovies(
-      movies.filter((movie) => {
-        return (
-          movie.title.toLowerCase().includes(textFilter) &&
-          movie.watched === watchedFilter
+  const listMovies = () => {
+    fetch("http://localhost:3000/api/movies")
+      .then((res) => res.json())
+      .then((data) => {
+        const fetchedMovies = data.movieData;
+        setMovies(fetchedMovies);
+        setDisplayedMovies(
+          fetchedMovies.filter((movie) => {
+            return (
+              movie.title.toLowerCase().includes(textFilter) &&
+              movie.watched === watchedFilter
+            );
+          })
         );
       })
-    );
+      .then()
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   useEffect(() => {
-    filterMovies();
-  }, [movies, textFilter, watchedFilter]);
+    listMovies();
+  }, [textFilter, watchedFilter]);
 
   return (
     <div className="main-container">

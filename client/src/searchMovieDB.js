@@ -1,8 +1,9 @@
 import { API_KEY } from "./config/config.js";
 import * as $ from "jquery";
 
-const ENDPOINT = "https://api.themoviedb.org/3/search/movie?api_key=";
-const POSTER_PREFIX = "https://image.tmdb.org/t/p/original";
+// const ENDPOINT = "https://api.themoviedb.org/3/search/movie?api_key=";
+const ENDPOINT = "http://localhost:3000/api/movies";
+// const POSTER_PREFIX = "https://image.tmdb.org/t/p/original";
 
 // $.ajaxPrefilter(function (settings, _, jqXHR) {
 //   jqXHR.setRequestHeader("Authorization", API_KEY);
@@ -10,7 +11,8 @@ const POSTER_PREFIX = "https://image.tmdb.org/t/p/original";
 
 var searchMovieDB = (query, callback) => {
   $.ajax({
-    url: `${ENDPOINT}${API_KEY}&query=${query}`,
+    // url: `${ENDPOINT}${API_KEY}&query=${query}`,
+    url: `${ENDPOINT}`,
     type: "GET",
     contentType: "application/json",
     success: (data) => {

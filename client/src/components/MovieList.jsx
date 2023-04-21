@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from "react";
 import MovieInfo from "./MovieInfo.jsx";
+
 const MovieList = ({
   movies,
   displayedMovies,
