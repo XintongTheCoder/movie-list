@@ -1,4 +1,4 @@
-const initialMovieData = [
+exports.movieData = [
   {
     title: "Gone with the Wind",
     original_language: "en",
@@ -22,5 +22,3 @@ const initialMovieData = [
       "https://image.tmdb.org/t/p/original/fECBtHlr0RB3foNHDiCBXeg9Bv9.jpg",
   },
 ];
-
-export default initialMovieData;

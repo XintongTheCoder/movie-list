@@ -27,7 +27,7 @@ const App = (props) => {
 
   return (
     <div className="main-container">
-      <h2 id="title">MovieList</h2>
+      <h2 id="movie-list-title">MovieList</h2>
       <div className="add-bar">
         <input
           type="text"
