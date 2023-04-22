@@ -1,40 +1,56 @@
 import React, { useState, useEffect } from "react";
 import MovieList from "./MovieList.jsx";
 import searchMovieDB from "../searchMovieDB.js";
-import initialMovieData from "../data/initialMovieData.js";
 
 const App = (props) => {
   const [movies, setMovies] = useState([]);
-
   const [textFilter, setTextFilter] = useState("");
   const [watchedFilter, setWatchedFilter] = useState(true);
   const [displayedMovies, setDisplayedMovies] = useState(movies);
   const [newMovieTitle, setNewMovieTitle] = useState("");
 
   const listMovies = () => {
+    setDisplayedMovies(
+      displayedMovies.filter((movie) => {
+        return (
+          movie.title.toLowerCase().includes(textFilter) &&
+          movie.watched === watchedFilter
+        );
+      })
+    );
+  };
+
+  const fetchMovies = () => {
     fetch("http://localhost:3000/api/movies")
       .then((res) => res.json())
       .then((data) => {
         const fetchedMovies = data;
         setMovies(fetchedMovies);
-        setDisplayedMovies(
-          fetchedMovies.filter((movie) => {
-            return (
-              movie.title.toLowerCase().includes(textFilter) &&
-              movie.watched === watchedFilter
-            );
-          })
-        );
+        setDisplayedMovies(fetchedMovies);
+        // console.log(fetchedMovies);
+        // console.log("TEXTFILTER", textFilter);
+        // console.log("A+WATCHED", watchedFilter);
+        // setDisplayedMovies(
+        //   fetchedMovies.filter((movie) => {
+        //     return (
+        //       movie.title.toLowerCase().includes(textFilter) &&
+        //       movie.watched === watchedFilter
+        //     );
+        //   })
+        // );
       })
-      .then()
       .catch((err) => {
-        console.log(err.message);
+        console.error(err.message);
       });
   };
 
   useEffect(() => {
+    fetchMovies();
+  }, [displayedMovies]);
+
+  useEffect(() => {
     listMovies();
-  }, [textFilter, watchedFilter]);
+  }, [movies, textFilter, watchedFilter]);
 
   return (
     <div className="main-container">
