@@ -91,7 +91,6 @@ const MovieList = ({
                         }
                         return movie;
                       });
-                      console.log(newMovies);
                       setMovies(newMovies);
                     }}
                   >

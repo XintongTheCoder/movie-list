@@ -9,9 +9,10 @@ const App = (props) => {
   const [displayedMovies, setDisplayedMovies] = useState(movies);
   const [newMovieTitle, setNewMovieTitle] = useState("");
 
+  // TODO: filter and search should be done at server side!!!!!
   const listMovies = () => {
     setDisplayedMovies(
-      displayedMovies.filter((movie) => {
+      movies.filter((movie) => {
         return (
           movie.title.toLowerCase().includes(textFilter) &&
           movie.watched === watchedFilter
@@ -27,17 +28,6 @@ const App = (props) => {
         const fetchedMovies = data;
         setMovies(fetchedMovies);
         setDisplayedMovies(fetchedMovies);
-        // console.log(fetchedMovies);
-        // console.log("TEXTFILTER", textFilter);
-        // console.log("A+WATCHED", watchedFilter);
-        // setDisplayedMovies(
-        //   fetchedMovies.filter((movie) => {
-        //     return (
-        //       movie.title.toLowerCase().includes(textFilter) &&
-        //       movie.watched === watchedFilter
-        //     );
-        //   })
-        // );
       })
       .catch((err) => {
         console.error(err.message);
@@ -46,8 +36,9 @@ const App = (props) => {
 
   useEffect(() => {
     fetchMovies();
-  }, [displayedMovies]);
+  }, []);
 
+  // Handle filter change only
   useEffect(() => {
     listMovies();
   }, [movies, textFilter, watchedFilter]);
@@ -71,11 +62,6 @@ const App = (props) => {
             searchMovieDB(newMovieTitle, (newMovie) => {
               setMovies([...movies, newMovie]);
             });
-            // const newMovies = movies.concat({
-            //   title: newMovie,
-            //   watched: false,
-            // });
-            // setMovies(newMovies); // NOTE: After this line, movies hasn't got updated yet; Any state change --> triggers App rerender(new function call) --> update movies in new function call
             setTextFilter("");
           }}
         >
