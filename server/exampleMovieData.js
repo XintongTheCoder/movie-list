@@ -1,4 +1,4 @@
-exports.movieData = [
+exports.exampleMovieData = [
   {
     title: "Gone with the Wind",
     original_language: "en",
