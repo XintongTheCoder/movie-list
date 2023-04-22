@@ -15,7 +15,7 @@ const App = (props) => {
     fetch("http://localhost:3000/api/movies")
       .then((res) => res.json())
       .then((data) => {
-        const fetchedMovies = data.movieData;
+        const fetchedMovies = data;
         setMovies(fetchedMovies);
         setDisplayedMovies(
           fetchedMovies.filter((movie) => {
